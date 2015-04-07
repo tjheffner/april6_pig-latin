@@ -10,4 +10,8 @@ describe('translate', function () {
     it("for words that start with multiple consonants, move them all to the end and add 'ay'", function() {
         expect(translate("school")).to.equal("oolschay");
     });
+
+    it("for words that start with 'q', move both the 'q' and 'u' to the end and add 'ay'", function() {
+        expect(translate("quick")).to.equal("ickquay");
+    });
 });

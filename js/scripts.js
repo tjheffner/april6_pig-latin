@@ -1,22 +1,40 @@
 var translate = function(word) {
-    var text1 = word;
+    var input = word;
     var ay = "ay";
-    var temp = "";
+    var consonants = "";
     var output = word;
 
     for (var i = 0; i <= word.length; i++) {
 
-        if (word[i] !== 'a' && word[i] !== 'e' && word[i] !== 'i'
-                        && word[i] !== 'o' && word[i] !== 'u') {
+      if (word[i] === 'q' && word[i+1] === 'u') {
 
-            output = text1.slice(i + 1, text1.length);
+            output = input.slice(i+2, input.length);
 
-            temp += text1[i];
+            consonants += input.substr(0, 2);
 
-        } else {
-            return output + temp + ay;
-        }
+          return output + consonants + ay;
 
+      } else if (word[i] !== 'a' && word[i] !== 'e' && word[i] !== 'i'
+                                 && word[i] !== 'o' && word[i] !== 'u') {
+
+            output = input.slice(i + 1, input.length);
+
+            consonants += input[i];
+
+      } else {
+          return output + consonants + ay;
+      }
     }
-
 };
+
+$(document).ready(function() {
+  $("form#pig-latin").submit(function(event) {
+    var word = $("input#word").val();
+    var result = translate(word);
+
+  $("#translated").text(result);
+
+  $("#result").show();
+  event.preventDefault();
+  });
+});
